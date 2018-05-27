@@ -1,6 +1,7 @@
 package john.lighterletter.com.earthquakes.results;
 
-import android.support.v7.widget.AppCompatButton;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,21 +24,24 @@ class EarthQuakeViewHolder extends RecyclerView.ViewHolder {
         return LayoutInflater.from(parent.getContext()).inflate(R.layout.event_view_holder, parent, false);
     }
 
-    public void bind(EarthquakeEvent earthquakeEvent) {
-
-        Calendar cl = Calendar.getInstance();
-        cl.setTimeInMillis(earthquakeEvent.getDate());
-        SimpleDateFormat dateformat = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
-        String date = dateformat.format(cl.getTime());
-
+    public void bind(final EarthquakeEvent earthquakeEvent) {
+        String date = getDateFromEvent(earthquakeEvent.getDate());
         ((AppCompatTextView) itemView.findViewById(R.id.location_text_view)).setText(earthquakeEvent.getLocation());
         ((AppCompatTextView) itemView.findViewById(R.id.magnitude_text_view)).setText(String.format("Magnitude: %s", String.valueOf(earthquakeEvent.getMagnitude())));
         ((AppCompatTextView) itemView.findViewById(R.id.date_text_view)).setText(String.format("Date: %s", date));
-        ((AppCompatButton) itemView.findViewById(R.id.more_info_button)).setOnClickListener(new View.OnClickListener() {
+        (itemView.findViewById(R.id.more_info_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthquakeEvent.getUrl()));
+                itemView.getContext().startActivity(browserIntent);
             }
         });
+    }
+
+    private String getDateFromEvent(long date) {
+        Calendar cl = Calendar.getInstance();
+        cl.setTimeInMillis(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+        return dateFormat.format(cl.getTime());
     }
 }

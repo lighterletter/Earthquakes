@@ -25,8 +25,6 @@ public class JsonUtil {
 
         try {
             JSONObject response = new JSONObject(json);
-
-
             JSONArray features = response.getJSONArray("features");
 
             for (int i = 0; i < features.length(); i++) {
@@ -35,7 +33,13 @@ public class JsonUtil {
 
                 EarthquakeEvent event = new EarthquakeEvent();
 
-                event.setMagnitude(properties.getDouble("mag"));
+                Object magnitude = properties.get("mag");
+                double eventMagnitude = 0.0;
+                if (!magnitude.toString().equals("null")) { // in some instances we can get a null value for this field.
+                    eventMagnitude = (Double) magnitude;
+                }
+
+                event.setMagnitude(eventMagnitude);
                 event.setLocation(properties.getString("place"));
                 event.setUrl(properties.getString("url"));
                 event.setDate(properties.getLong("time"));

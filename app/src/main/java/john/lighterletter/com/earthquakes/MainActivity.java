@@ -101,8 +101,12 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onResponse(String jsonResponse) {
-        Intent resultsPage = new Intent(this, ResultsActivity.class);
-        resultsPage.putExtra("response", jsonResponse);
-        startActivity(resultsPage);
+        if (!jsonResponse.isEmpty()) {
+            Intent resultsPage = new Intent(this, ResultsActivity.class);
+            resultsPage.putExtra(getString(R.string.json_response_key), jsonResponse);
+            startActivity(resultsPage);
+        } else {
+            Toast.makeText(this, "Something went wrong please try again later", Toast.LENGTH_SHORT).show();
+        }
     }
 }

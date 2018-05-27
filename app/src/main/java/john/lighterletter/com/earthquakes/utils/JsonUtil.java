@@ -11,6 +11,9 @@ import java.util.List;
 
 import john.lighterletter.com.earthquakes.model.EarthquakeEvent;
 
+/**
+ * Utility class that isolates json parsing.
+ */
 public class JsonUtil {
     private static final String TAG = JsonUtil.class.getSimpleName();
 

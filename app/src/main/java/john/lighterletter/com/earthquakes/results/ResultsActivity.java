@@ -20,11 +20,10 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        String jsonResponse = getIntent().getExtras().getString("response");
+        String jsonResponse = getIntent().getExtras().getString(getString(R.string.json_response_key),"");
         List<EarthquakeEvent> events = JsonUtil.parseEarthQuakeEvents(jsonResponse);
 
         RecyclerView recyclerView = findViewById(R.id.results_recycler_view);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new EarthQuakeAdapter(events));
 

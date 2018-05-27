@@ -43,7 +43,7 @@ public class InitialRequestTask extends AsyncTask<String, String, String> {
         } catch (Exception e) {
             Log.e("doInBackground", e.getLocalizedMessage());
         }
-        return result;
+        return result; // returns an empty string if something goes wrong
     }
 
     @Override

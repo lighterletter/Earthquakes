@@ -4,6 +4,7 @@
     <string name="number_of_results"># of results</string>
     <string name="go_button">Go</string>
     <string name="api_request"><![CDATA[https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=%s&eventtype=earthquake&limit=%d&%s]]></string>
+    <string name="json_response_key">response</string>
 
     <string-array name="api_order_by">
         <item>Latest First</item>

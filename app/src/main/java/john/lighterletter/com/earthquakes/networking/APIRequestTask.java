@@ -12,11 +12,14 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class InitialRequestTask extends AsyncTask<String, String, String> {
-    private static final String TAG = InitialRequestTask.class.getSimpleName();
+/**
+ * Simple Async task that returns a JSON Response using a delegate to the implementing class
+ */
+public class APIRequestTask extends AsyncTask<String, String, String> {
+    private static final String TAG = APIRequestTask.class.getSimpleName();
     private ResponseDelegate delegate;
 
-    public InitialRequestTask(ResponseDelegate delegate) {
+    public APIRequestTask(ResponseDelegate delegate) {
         this.delegate = delegate;
     }
 
@@ -33,12 +36,14 @@ public class InitialRequestTask extends AsyncTask<String, String, String> {
             urlConnection.setRequestMethod("GET");
             int statusCode = urlConnection.getResponseCode();
 
-            if (statusCode == 200) {
+            if (statusCode == HttpsURLConnection.HTTP_OK) {
 
                 Log.d(TAG, "response OK: " + statusCode + "");
                 inputStream = new BufferedInputStream(urlConnection.getInputStream());
                 result = convertInputStreamToString(inputStream);
 
+            } else {
+                Log.e(TAG, "doInBackground: Expected  200, Response code was: " + statusCode);
             }
         } catch (Exception e) {
             Log.e("doInBackground", e.getLocalizedMessage());

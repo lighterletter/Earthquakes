@@ -12,8 +12,10 @@ import john.lighterletter.com.earthquakes.R;
 import john.lighterletter.com.earthquakes.model.EarthquakeEvent;
 import john.lighterletter.com.earthquakes.utils.JsonUtil;
 
+/**
+ * This activity displays results from the API call
+ */
 public class ResultsActivity extends AppCompatActivity {
-    public static final String TAG = ResultsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

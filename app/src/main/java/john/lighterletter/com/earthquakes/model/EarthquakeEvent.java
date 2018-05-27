@@ -1,5 +1,8 @@
 package john.lighterletter.com.earthquakes.model;
 
+/**
+ * Model class for earthquake event
+ */
 public class EarthquakeEvent {
 
     private String url;

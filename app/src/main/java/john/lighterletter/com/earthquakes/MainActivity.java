@@ -19,17 +19,18 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
-import john.lighterletter.com.earthquakes.networking.InitialRequestTask;
+import john.lighterletter.com.earthquakes.networking.APIRequestTask;
 import john.lighterletter.com.earthquakes.results.ResultsActivity;
 
 public class MainActivity extends AppCompatActivity implements
-        InitialRequestTask.ResponseDelegate,
+        APIRequestTask.ResponseDelegate,
         AdapterView.OnItemSelectedListener,
         View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private String orderSelected = "";
     private EditText numberOfResultsEditText;
+    //static map keys must match values at: R.array.api_order_by
     private static final HashMap<String, String> orderMap = new HashMap<String, String>() {{
         put("Latest First", "orderby=time");
         put("Oldest First", "orderby=time-asc");
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements
             String orderBy = orderMap.get(orderSelected);
             String url = String.format(getString(R.string.api_request), getDate30DaysAgo(), numOfResults, orderBy);
             Log.d(TAG, "onCreate: url: " + url); // for debugging ease
-            new InitialRequestTask(this).execute(url);
+            new APIRequestTask(this).execute(url);
         }
     }
 

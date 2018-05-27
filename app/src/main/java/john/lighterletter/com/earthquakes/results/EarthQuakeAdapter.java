@@ -11,7 +11,7 @@ import john.lighterletter.com.earthquakes.model.EarthquakeEvent;
 class EarthQuakeAdapter extends RecyclerView.Adapter<EarthQuakeViewHolder> {
     private List<EarthquakeEvent> events;
 
-    public EarthQuakeAdapter(List<EarthquakeEvent> events) {
+    EarthQuakeAdapter(List<EarthquakeEvent> events) {
         this.events = events;
     }
 

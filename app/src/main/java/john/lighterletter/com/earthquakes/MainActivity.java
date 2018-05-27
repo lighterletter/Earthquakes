@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements
         View.OnClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private String orderSelected = "";
+    private EditText numberOfResultsEditText;
     private static final HashMap<String, String> orderMap = new HashMap<String, String>() {{
         put("Latest First", "orderby=time");
         put("Oldest First", "orderby=time-asc");
@@ -35,9 +37,7 @@ public class MainActivity extends AppCompatActivity implements
         put("Weakest First", "orderby=magnitude-asc");
     }};
 
-    private String orderSelected = "";
-    private EditText numberOfResultsEditText;
-
+    //region Override methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,16 +46,6 @@ public class MainActivity extends AppCompatActivity implements
         initializeSpinner();
         numberOfResultsEditText = findViewById(R.id.number_or_results_et);
         findViewById(R.id.request_button).setOnClickListener(this);
-    }
-
-    private void initializeSpinner() {
-        Spinner spinner = (Spinner) findViewById(R.id.order_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.api_order_by,
-                android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -78,24 +68,12 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private String getDate30DaysAgo() {
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        c.add(Calendar.DAY_OF_MONTH, -30);
-        return dateFormat.format(c.getTime());
-    }
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         orderSelected = parent.getItemAtPosition(pos).toString();
     }
 
+    @Override
     public void onNothingSelected(AdapterView<?> parent) {
     } //blank on purpose
 
@@ -109,4 +87,31 @@ public class MainActivity extends AppCompatActivity implements
             Toast.makeText(this, "Something went wrong please try again later", Toast.LENGTH_SHORT).show();
         }
     }
+    //endregion
+
+    //region Private methods
+    private void initializeSpinner() {
+        Spinner spinner = (Spinner) findViewById(R.id.order_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.api_order_by,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    private String getDate30DaysAgo() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        c.add(Calendar.DAY_OF_MONTH, -30);
+        return dateFormat.format(c.getTime());
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+    //endregion
 }

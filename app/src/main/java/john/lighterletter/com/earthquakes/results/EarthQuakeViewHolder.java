@@ -16,7 +16,7 @@ import john.lighterletter.com.earthquakes.R;
 import john.lighterletter.com.earthquakes.model.EarthquakeEvent;
 
 class EarthQuakeViewHolder extends RecyclerView.ViewHolder {
-    public EarthQuakeViewHolder(ViewGroup parent) {
+    EarthQuakeViewHolder(ViewGroup parent) {
         super(inflateView(parent));
     }
 
@@ -27,8 +27,8 @@ class EarthQuakeViewHolder extends RecyclerView.ViewHolder {
     public void bind(final EarthquakeEvent earthquakeEvent) {
         String date = getDateFromEvent(earthquakeEvent.getDate());
         ((AppCompatTextView) itemView.findViewById(R.id.location_text_view)).setText(earthquakeEvent.getLocation());
-        ((AppCompatTextView) itemView.findViewById(R.id.magnitude_text_view)).setText(String.format("Magnitude: %s", String.valueOf(earthquakeEvent.getMagnitude())));
-        ((AppCompatTextView) itemView.findViewById(R.id.date_text_view)).setText(String.format("Date: %s", date));
+        ((AppCompatTextView) itemView.findViewById(R.id.magnitude_text_view)).setText(String.format(itemView.getContext().getString(R.string.magnitude_viewholder_message), String.valueOf(earthquakeEvent.getMagnitude())));
+        ((AppCompatTextView) itemView.findViewById(R.id.date_text_view)).setText(String.format(itemView.getContext().getString(R.string.date_viewholder_message), date));
         (itemView.findViewById(R.id.more_info_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

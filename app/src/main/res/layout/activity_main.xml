@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="40dp"
     tools:context=".MainActivity">
 
 
@@ -11,7 +12,7 @@
         android:id="@+id/onboarding_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="40dp"
+        android:paddingBottom="40dp"
         android:text="@string/onboarding_prompt"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,10 +23,11 @@
 
     <LinearLayout
         android:id="@+id/user_input"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +38,15 @@
             android:id="@+id/order_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp" />
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1" />
 
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/number_or_results_tv"
+            android:id="@+id/number_or_results_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
             android:hint="@string/number_of_results"
             android:inputType="number"
             android:textAlignment="center" />
@@ -52,8 +56,8 @@
         android:id="@+id/request_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go"
         android:background="@drawable/custom_button"
+        android:text="@string/go_button"
         android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

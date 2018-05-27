@@ -60,12 +60,21 @@ public class MainActivity extends AppCompatActivity implements
         if (orderSelected.isEmpty() || numOfResultsString.isEmpty()) {
             Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
         } else {
+
+            displayLoadingUI();
+
             int numOfResults = Integer.parseInt(numOfResultsString);
             String orderBy = orderMap.get(orderSelected);
             String url = String.format(getString(R.string.api_request), getDate30DaysAgo(), numOfResults, orderBy);
             Log.d(TAG, "onCreate: url: " + url);
             new InitialRequestTask(this).execute(url);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        restoreInitialUI();
     }
 
     @Override
@@ -98,6 +107,16 @@ public class MainActivity extends AppCompatActivity implements
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+    }
+
+    private void displayLoadingUI() {
+        findViewById(R.id.request_button).setVisibility(View.INVISIBLE);
+        findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+    }
+
+    private void restoreInitialUI() {
+        findViewById(R.id.request_button).setVisibility(View.VISIBLE);
+        findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
     }
 
     private String getDate30DaysAgo() {

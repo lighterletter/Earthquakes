@@ -1,5 +1,6 @@
 package john.lighterletter.com.earthquakes;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,8 +70,7 @@ public class MainActivity extends AppCompatActivity implements
             String orderBy = orderMap.get(orderSelected);
             String url = String.format(getString(R.string.api_request), getDate30DaysAgo(), numOfResults, orderBy);
             Log.d(TAG, "onCreate: url: " + url);
-
-//            new InitialRequestTask(this).execute(url);
+            new InitialRequestTask(this).execute(url);
         }
     }
 
@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onResponse(String jsonResponse) {
-        Log.d(TAG, "onResponse: " + jsonResponse);
+        Intent resultsPage = new Intent(this, ResultsActivity.class);
+        resultsPage.putExtra("response", jsonResponse);
+        startActivity(resultsPage);
     }
 }

@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
+    android:paddingBottom="20dp"
+    android:paddingEnd="40dp"
+    android:paddingStart="40dp"
+    android:paddingTop="20dp"
     tools:context=".MainActivity">
-
 
     <TextView
         android:id="@+id/onboarding_textview"
@@ -64,6 +66,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_input"
         app:layout_constraintVertical_bias="0.2" />
-
 
 </android.support.constraint.ConstraintLayout>

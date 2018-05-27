@@ -4,7 +4,7 @@ public class EarthquakeEvent {
 
     private String url;
     private String location;
-    private double magnitude;
+    private String magnitude;
     private long date;
 
     public String getUrl() {
@@ -23,11 +23,11 @@ public class EarthquakeEvent {
         this.location = location;
     }
 
-    public double getMagnitude() {
+    public String getMagnitude() {
         return magnitude;
     }
 
-    public void setMagnitude(double magnitude) {
+    public void setMagnitude(String magnitude) {
         this.magnitude = magnitude;
     }
 

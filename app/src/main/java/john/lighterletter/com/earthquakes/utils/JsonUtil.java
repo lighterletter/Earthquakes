@@ -33,13 +33,18 @@ public class JsonUtil {
 
                 EarthquakeEvent event = new EarthquakeEvent();
 
+                /**
+                 * In some instances we can get a null value for magnitude, an int or a double
+                 * so I just used toString() and checked for null.
+                 */
                 Object magnitude = properties.get("mag");
-                double eventMagnitude = 0.0;
-                if (!magnitude.toString().equals("null")) { // in some instances we can get a null value for this field.
-                    eventMagnitude = (Double) magnitude;
+                if (magnitude.toString().equals("null")) {
+                    String eventMagnitude = "unavailable";
+                    event.setMagnitude(eventMagnitude);
+                } else {
+                    event.setMagnitude(magnitude.toString());
                 }
 
-                event.setMagnitude(eventMagnitude);
                 event.setLocation(properties.getString("place"));
                 event.setUrl(properties.getString("url"));
                 event.setDate(properties.getLong("time"));

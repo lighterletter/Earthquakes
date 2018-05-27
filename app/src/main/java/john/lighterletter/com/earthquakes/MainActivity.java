@@ -59,12 +59,15 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         if (orderSelected.isEmpty() || numOfResultsString.isEmpty()) {
-            Toast.makeText(this, R.string.prompt_invalid_fields, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.prompt_invalid_fields, Toast.LENGTH_LONG).show();
         } else {
 
-            displayLoadingUI();
-
             int numOfResults = Integer.parseInt(numOfResultsString);
+            if (numOfResults > 200) {
+                Toast.makeText(this, "Please limit requests to 200 items to ensure good performance", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            displayLoadingUI();
             String orderBy = orderMap.get(orderSelected);
             String url = String.format(getString(R.string.api_request), getDate30DaysAgo(), numOfResults, orderBy);
             Log.d(TAG, "onCreate: url: " + url); // for debugging ease

@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import john.lighterletter.com.earthquakes.networking.InitialRequestTask;
+import john.lighterletter.com.earthquakes.results.ResultsActivity;
 
 public class MainActivity extends AppCompatActivity implements
         InitialRequestTask.ResponseDelegate,

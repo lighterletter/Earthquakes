@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements
 
         initializeSpinner();
         numberOfResultsEditText = findViewById(R.id.number_or_results_et);
-        findViewById(R.id.request_button).setOnClickListener(this);
+        findViewById(R.id.make_api_request_button).setOnClickListener(this);
     }
 
     @Override
@@ -53,12 +53,12 @@ public class MainActivity extends AppCompatActivity implements
         String numOfResultsString = numberOfResultsEditText.getText().toString();
 
         if (!isNetworkAvailable()) {
-            Toast.makeText(this, "Please make sure you have an internet connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.prompt_no_internet, Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (orderSelected.isEmpty() || numOfResultsString.isEmpty()) {
-            Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.prompt_invalid_fields, Toast.LENGTH_SHORT).show();
         } else {
 
             displayLoadingUI();
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements
             int numOfResults = Integer.parseInt(numOfResultsString);
             String orderBy = orderMap.get(orderSelected);
             String url = String.format(getString(R.string.api_request), getDate30DaysAgo(), numOfResults, orderBy);
-            Log.d(TAG, "onCreate: url: " + url);
+            Log.d(TAG, "onCreate: url: " + url); // for debugging ease
             new InitialRequestTask(this).execute(url);
         }
     }
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements
             resultsPage.putExtra(getString(R.string.json_response_key), jsonResponse);
             startActivity(resultsPage);
         } else {
-            Toast.makeText(this, "Something went wrong please try again later", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.prompt_parsing_error, Toast.LENGTH_SHORT).show();
         }
     }
     //endregion
@@ -110,12 +110,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void displayLoadingUI() {
-        findViewById(R.id.request_button).setVisibility(View.INVISIBLE);
+        findViewById(R.id.make_api_request_button).setVisibility(View.INVISIBLE);
         findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
     }
 
     private void restoreInitialUI() {
-        findViewById(R.id.request_button).setVisibility(View.VISIBLE);
+        findViewById(R.id.make_api_request_button).setVisibility(View.VISIBLE);
         findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
     }
 

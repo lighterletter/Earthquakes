@@ -1,17 +1,25 @@
 <resources>
     <string name="app_name">EarthQuakes</string>
-    <string name="onboarding_prompt">Welcome to EarthQuakes! This app displays earthquake data for the past 30 days from the US Geological Survey website. Just specify the order in which you\'d like the info and how many results you\'d like to request, then click go. Enjoy!</string>
-    <string name="number_of_results"># of results</string>
-    <string name="go_button">Go</string>
+
+    <!-- program strings -->
     <string name="api_request"><![CDATA[https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=%s&eventtype=earthquake&limit=%d&%s]]></string>
     <string name="json_response_key">response</string>
+
+    <!-- UI strings -->
+    <string name="number_of_results"># of results</string>
+    <string name="go_button">Go</string>
     <string name="magnitude_viewholder_message">Magnitude: %s</string>
     <string name="date_viewholder_message">Date: %s</string>
-
     <string-array name="api_order_by">
         <item>Latest First</item>
         <item>Oldest First</item>
         <item>Strongest First</item>
         <item>Weakest First</item>
     </string-array>
+
+    <!-- prompts -->
+    <string name="prompt_onboarding">Welcome to EarthQuakes! This app displays earthquake data for the past 30 days from the US Geological Survey website. Just specify the order in which you\'d like the info and how many results you\'d like to request, then click go. Enjoy!</string>
+    <string name="prompt_no_internet">Please make sure you have a working internet connection</string>
+    <string name="prompt_invalid_fields">Please fill out all fields</string>
+    <string name="prompt_parsing_error">Something went wrong please try again later</string>
 </resources>

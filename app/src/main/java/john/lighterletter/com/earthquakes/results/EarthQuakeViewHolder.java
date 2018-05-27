@@ -25,10 +25,13 @@ class EarthQuakeViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(final EarthquakeEvent earthquakeEvent) {
-        String date = getDateFromEvent(earthquakeEvent.getDate());
-        ((AppCompatTextView) itemView.findViewById(R.id.location_text_view)).setText(earthquakeEvent.getLocation());
-        ((AppCompatTextView) itemView.findViewById(R.id.magnitude_text_view)).setText(String.format(itemView.getContext().getString(R.string.magnitude_viewholder_message), String.valueOf(earthquakeEvent.getMagnitude())));
-        ((AppCompatTextView) itemView.findViewById(R.id.date_text_view)).setText(String.format(itemView.getContext().getString(R.string.date_viewholder_message), date));
+        String location = earthquakeEvent.getLocation();
+        String magnitude = String.format(itemView.getContext().getString(R.string.magnitude_viewholder_message), earthquakeEvent.getMagnitude());
+        String date = String.format(itemView.getContext().getString(R.string.date_viewholder_message), getDateFromEvent(earthquakeEvent.getDate()));
+
+        ((AppCompatTextView) itemView.findViewById(R.id.location_text_view)).setText(location);
+        ((AppCompatTextView) itemView.findViewById(R.id.magnitude_text_view)).setText(magnitude);
+        ((AppCompatTextView) itemView.findViewById(R.id.date_text_view)).setText(date);
         (itemView.findViewById(R.id.more_info_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

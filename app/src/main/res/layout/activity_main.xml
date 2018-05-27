@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="40dp"
-        android:text="@string/onboarding_prompt"
+        android:text="@string/prompt_onboarding"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -55,7 +55,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/request_button"
+        android:id="@+id/make_api_request_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_button"
